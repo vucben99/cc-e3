@@ -15,12 +15,14 @@ const setDisplay = (event) => {
 
     if (event.target.nextElementSibling.style.display === "block") {
         event.target.nextElementSibling.style.display = "none"
+        event.target.textContent = "Show more"
     } else {
         event.target.nextElementSibling.style.display = "block"
+        event.target.textContent = "Show less"
     }
 }
 
-const init = async () => {
+const init = async (user) => {
 
     const response = await fetch(`https://api.github.com/users`, {
         headers: {
