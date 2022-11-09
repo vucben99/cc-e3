@@ -1,5 +1,7 @@
 const root = document.getElementById("root")
+
 const userCardsContainer = document.createElement("div")
+userCardsContainer.classList = "userCardsContainer"
 
 const searchBar = document.createElement("input")
 searchBar.classList = "searchBar"
@@ -22,7 +24,10 @@ const setDisplay = (event) => {
     }
 }
 
-const init = async (user) => {
+const init = async () => {
+
+    userCardsContainer.innerHTML = "<p>Loading...</p>"
+    root.appendChild(userCardsContainer)
 
     const response = await fetch(`https://api.github.com/users`, {
         headers: {
@@ -31,7 +36,7 @@ const init = async (user) => {
     })
     const usersData = await response.json()
 
-    userCardsContainer.classList = "userCardsContainer"
+
 
     userCardsContainer.innerHTML = usersData.map((user) => {
         return `
