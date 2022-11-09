@@ -31,9 +31,9 @@ const getUsersData = async () => {
     return usersData
 }
 
-const renderUserCards = (usersData, filteredUsers) => {
+const renderUserCards = async (usersData, filteredUsers) => {
 
-    userCardsContainer.innerHTML = filteredUsers.map((user) => {
+    userCardsContainer.innerHTML = await filteredUsers.map((user) => {
         return `
         <div class="userCard">
             <img src=${user.avatar_url}>
@@ -67,7 +67,7 @@ const init = async () => {
 
     const usersData = await getUsersData()
 
-    renderUserCards(usersData, usersData)
+    await renderUserCards(usersData, usersData)
 
     searchBar.addEventListener("input", (event) => {
         const filteredUsers = data.filter((user) => user.login.toLowerCase().startsWith(event.target.value))
