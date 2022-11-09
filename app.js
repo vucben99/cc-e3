@@ -11,17 +11,7 @@ searchBar.id = "searchInput"
 searchBar.setAttribute("type", "text")
 searchBar.setAttribute("placeholder", "Search")
 
-const searchInput = document.querySelector("#searchInput");
-
 let data = [];
-
-searchBar.addEventListener("input", (event) => {
-    const filteredUsers = data.filter((user) => user.login.toLowerCase().startsWith(event.target.value))
-    renderUserCards(data, filteredUsers)
-})
-
-
-
 
 root.appendChild(searchBar)
 
@@ -77,7 +67,12 @@ const init = async () => {
 
     const usersData = await getUsersData()
 
-    renderUserCards(usersData)
+    renderUserCards(usersData, usersData)
+
+    searchBar.addEventListener("input", (event) => {
+        const filteredUsers = data.filter((user) => user.login.toLowerCase().startsWith(event.target.value))
+        renderUserCards(data, filteredUsers)
+    })
 
     const btns = document.getElementsByTagName("button")
     for (const btn of btns) {
