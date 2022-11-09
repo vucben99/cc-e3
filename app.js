@@ -76,7 +76,7 @@ const init = async () => {
 
     const btns = document.getElementsByTagName("button")
     for (const btn of btns) {
-        btn.addEventListener("click", setDisplay)
+        btn.addEventListener("click", (event) => setDisplay(event))
     }
 }
 
