@@ -1,5 +1,6 @@
 import setDisplay from "./setDisplay.js"
 
+// Rendering user cards
 export default async function renderUserCards(usersData) {
 
     userCardsContainer.innerHTML = await usersData.map((user) =>
@@ -16,6 +17,7 @@ export default async function renderUserCards(usersData) {
         `
     ).join("")
 
+    // Adding click event handlers for the "Show more" buttons
     const btns = document.getElementsByTagName("button")
     for (const btn of btns) {
         btn.addEventListener("click", (event) => setDisplay(event))

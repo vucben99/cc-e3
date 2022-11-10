@@ -1,3 +1,4 @@
+// Getting data from the API
 export default async function getUsersData() {
     const response = await fetch(`https://api.github.com/users`, {
         headers: {

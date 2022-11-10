@@ -1,3 +1,4 @@
+// Setting display of hidden infos depending on current state
 export default function setDisplay(event) {
 
     if (event.target.nextElementSibling.style.display === "block") {
