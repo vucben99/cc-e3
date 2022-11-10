@@ -1,86 +1,34 @@
-// Initial setup
+import getUsersData from "/functions/getUsersData.js"
+import renderUserCards from "/functions/renderUserCards.js"
+import setDisplay from "/functions/setDisplay.js"
 
+// Getting data from the API
+let usersData = await getUsersData()
+
+// Getting root element
 const root = document.getElementById("root")
 
-const userCardsContainer = document.createElement("div")
-userCardsContainer.classList = "userCardsContainer"
-
+// Making search bar
 const searchBar = document.createElement("input")
-searchBar.classList = "searchBar"
 searchBar.id = "searchInput"
 searchBar.setAttribute("type", "text")
 searchBar.setAttribute("placeholder", "Search")
-
-let data = [];
-
 root.appendChild(searchBar)
 
+// Making container div for user cards
+const userCardsContainer = document.createElement("div")
+userCardsContainer.id = "userCardsContainer"
+userCardsContainer.innerHTML = "<p class='loading'>Loading...</p>"
+root.appendChild(userCardsContainer)
 
-// Declaring functions
+// Initial rendering of user cards
+renderUserCards(usersData)
 
-const getUsersData = async () => {
-    const response = await fetch(`https://api.github.com/users`, {
-        headers: {
-            authorization: "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"
-        }
-    })
-    const usersData = await response.json()
-    data = usersData;
+// Adding click event handlers for the "Show more" buttons
 
 
-    return usersData
-}
-
-const renderUserCards = async (usersData, filteredUsers) => {
-
-    userCardsContainer.innerHTML = await filteredUsers.map((user) => {
-        return `
-        <div class="userCard">
-            <img src=${user.avatar_url}>
-            <p>${user.login}</p>
-            <button>Show more</button>
-            <div class="hiddenInfo">
-                <p>Rank: ${user.type}</p>
-                <p>Admin: ${user.site_admin}</p>
-            </div>
-        </div>`
-    }).join("")
-
-    root.appendChild(userCardsContainer)
-}
-
-const setDisplay = (event) => {
-
-    if (event.target.nextElementSibling.style.display === "block") {
-        event.target.nextElementSibling.style.display = "none"
-        event.target.textContent = "Show more"
-    } else {
-        event.target.nextElementSibling.style.display = "block"
-        event.target.textContent = "Show less"
-    }
-}
-
-const init = async () => {
-
-    userCardsContainer.innerHTML = "<p>Loading...</p>"
-    root.appendChild(userCardsContainer)
-
-    const usersData = await getUsersData()
-
-    await renderUserCards(usersData, usersData)
-
-    searchBar.addEventListener("input", (event) => {
-        const filteredUsers = data.filter((user) => user.login.toLowerCase().startsWith(event.target.value))
-        renderUserCards(data, filteredUsers)
-    })
-
-    const btns = document.getElementsByTagName("button")
-    for (const btn of btns) {
-        btn.addEventListener("click", (event) => setDisplay(event))
-    }
-}
-
-// Invoking init function
-
-init()
-
+// Adding input event handler for the search field, which re-renders user cards on input
+document.getElementById("searchInput").addEventListener("input", (event) => {
+    const filteredData = usersData.filter((user) => user.login.toLowerCase().startsWith(event.target.value))
+    renderUserCards(filteredData)
+})
