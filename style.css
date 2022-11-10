@@ -4,37 +4,32 @@
     box-sizing: border-box;
 }
 
-:root {
-    --color-primary: #fefefe;
-}
-
 #root {
-    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 30%;
+    padding: 0 20%;
 }
 
 .hiddenInfo {
     display: none;
 }
 
-.userCardsContainer {
+#userCardsContainer {
     display: flex;
-    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     margin-top: 50px;
-    gap: 10px;
-
 }
 
 .userCard {
+    width: 120px;
     border: solid 3px gray;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 20px;
+    margin: 5px;
 }
 
 .userCard img {
