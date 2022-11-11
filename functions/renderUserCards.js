@@ -5,7 +5,7 @@ export default async function renderUserCards(usersData) {
 
     if (usersData.length) {
         userCardsContainer.innerHTML = await usersData.map((user) =>
-            `
+        `
         <div class="userCard">
             <img src=${user.avatar_url}>
             <p>${user.login}</p>
