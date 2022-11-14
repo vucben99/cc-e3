@@ -1,7 +1,7 @@
 // Importing functions
-import getUsersData from "/functions/getUsersData.js"
-import renderUserCards from "/functions/renderUserCards.js"
-import initPage from "/functions/initPage.js"
+import getUsersData from "./functions/getUsersData.js"
+import renderUserCards from "./functions/renderUserCards.js"
+import initPage from "./functions/initPage.js"
 
 // Initializing the page layout
 initPage()
