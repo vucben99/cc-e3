@@ -15,6 +15,6 @@ renderUserCards(usersData)
 // Adding input event handler for the search field, which re-renders user cards on input
 const searchInput = document.getElementById("searchInput")
 searchInput.addEventListener("input", (event) => {
-    const filteredData = usersData.filter((user) => user.login.toLowerCase().startsWith(event.target.value))
+    const filteredData = usersData.filter((user) => user.login.toLowerCase().startsWith(event.target.value.toLowerCase()))
     renderUserCards(filteredData)
 })
